@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TM_Storepickup>
+            <version>1.0.0</version>
+        </TM_Storepickup>
+    </modules>
+
+    <global>
+        <helpers>
+            <tm_storepickup>
+                <class>TM_Storepickup_Helper</class>
+            </tm_storepickup>
+        </helpers>
+    </global>
+
+    <frontend>
+        <translate>
+            <modules>
+                <TM_Storepickup>
+                    <files>
+                        <default>TM_Storepickup.csv</default>
+                    </files>
+                </TM_Storepickup>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <tm_storepickup module="TM_Storepickup">
+                    <file>tm/storepickup.xml</file>
+                </tm_storepickup>
+            </updates>
+        </layout>
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <TM_Storepickup>
+                    <files>
+                        <default>TM_Storepickup.csv</default>
+                    </files>
+                </TM_Storepickup>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <tm_storepickup>
+            <general>
+                <enabled>0</enabled>
+                <shipping_method></shipping_method>
+                <shipping_method_code></shipping_method_code>
+            </general>
+            <address>
+                <street></street>
+                <postcode></postcode>
+                <city></city>
+                <country_id></country_id>
+                <region_id></region_id>
+                <region></region>
+            </address>
+        </tm_storepickup>
+    </default>
+</config>

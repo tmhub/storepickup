@@ -1,0 +1,12 @@
+<config>
+    <modules>
+        <TM_Storepickup>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Checkout/>
+                <TM_FireCheckout/>
+            </depends>
+        </TM_Storepickup>
+    </modules>
+</config>

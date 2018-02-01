@@ -1,0 +1,5 @@
+app/code/community/TM/Storepickup                           app/code/community/TM/Storepickup
+app/design/frontend/base/default/layout/tm/storepickup.xml  app/design/frontend/base/default/layout/tm/storepickup.xml
+app/etc/modules/TM_Storepickup.xml                          app/etc/modules/TM_Storepickup.xml
+app/locale/en_US/TM_Storepickup.csv                         app/locale/en_US/TM_Storepickup.csv
+skin/frontend/base/default/tm/storepickup                   skin/frontend/base/default/tm/storepickup
