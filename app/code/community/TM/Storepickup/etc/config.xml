@@ -12,6 +12,11 @@
                 <class>TM_Storepickup_Helper</class>
             </tm_storepickup>
         </helpers>
+        <models>
+            <tm_storepickup>
+                <class>TM_Storepickup_Model</class>
+            </tm_storepickup>
+        </models>
     </global>
 
     <frontend>
@@ -31,6 +36,16 @@
                 </tm_storepickup>
             </updates>
         </layout>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <tm_storepickup>
+                        <class>tm_storepickup/observer</class>
+                        <method>applyPickupAddress</method>
+                    </tm_storepickup>
+                </observers>
+            </controller_action_predispatch>
+        </events>
     </frontend>
 
     <adminhtml>

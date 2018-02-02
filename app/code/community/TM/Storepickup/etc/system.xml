@@ -35,7 +35,7 @@
                         <heading_shipping translate="label">
                             <label>Select shipping method that will be used as "Pickup at Store" method</label>
                             <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
-                            <sort_order>35</sort_order>
+                            <sort_order>19</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>

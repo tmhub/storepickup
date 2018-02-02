@@ -1,0 +1,102 @@
+var FC = FC || {};
+FC.Storepickup = {
+    init: function () {
+        $('billing:use_for_shipping_yes').up('li').insert({
+            after: [
+                '<li class="control tm_storepickup" style="margin-top:-1px;">',
+                    '<input type="radio" id="tm_storepickup" name="billing[use_for_shipping]" value="tm_storepickup" class="radio"/>',
+                    '<label for="tm_storepickup">' + Translator.translate('Pickup at store') + '</label>',
+                '</li>'
+            ].join('')
+        });
+
+        var self = this;
+        $$('[name="billing[use_for_shipping]"]').each(function (el) {
+            el.observe('click', function () {
+                if (el.id === 'tm_storepickup') {
+                    self.enable.bind(self)();
+                    checkout.update(checkout.urls.shipping_address);
+                } else {
+                    self.disable.bind(self)();
+                }
+            });
+        });
+
+        if (shippingMethod.getCurrentMethod() === this.method) {
+            this.enable();
+        }
+    },
+
+    enable: function () {
+        $('shipping-address').hide();
+
+        // this radio doesn't sync with server
+        $('tm_storepickup').checked = true;
+
+        // force method activation
+        var el = $$('input[value=' + this.method + ']').first();
+        if (!el.checked) {
+            el.checked = true;
+            FC.Utils.fireEvent(el, 'click');
+        }
+
+        // hide all other methods
+        this.togglePickupMethodVisibility(true);
+    },
+
+    disable: function () {
+        var self = this;
+
+        this.togglePickupMethodVisibility(false);
+        if ($$('[name="shipping_method"]').length > 2) {
+            shippingMethod.reset();
+        } else {
+            $$('[name="shipping_method"]').each(function (radio) {
+                if (radio.value === self.method) {
+                    return;
+                }
+                radio.checked = true;
+                FC.Utils.fireEvent(radio, 'click');
+                throw $break;
+            });
+        }
+    },
+
+    sync: function () {
+        if ($('tm_storepickup').checked) {
+            this.togglePickupMethodVisibility(true);
+        } else {
+            this.togglePickupMethodVisibility(false);
+        }
+    },
+
+    togglePickupMethodVisibility: function (flag) {
+        var self = this;
+        $$('[name="shipping_method"]').each(function (radio) {
+            var method = flag ? 'show' : 'hide',
+                dd = radio.up('dd'),
+                dt = dd.previous('dt');
+
+            if (radio.value !== self.method) {
+                method = (method === 'show') ? 'hide' : 'show';
+            }
+
+            dd[method]();
+            dt[method]();
+        });
+    }
+};
+
+document.observe('dom:loaded', function () {
+    FC.Storepickup.init();
+});
+
+document.observe('firecheckout:setResponseAfter', function (e) {
+    if (!e.memo.response.update_section ||
+        !e.memo.response.update_section['shipping-method']) {
+
+        return;
+    }
+
+    FC.Storepickup.sync();
+});

@@ -7,5 +7,8 @@
                 <name>tm/storepickup/js/storepickup.js</name>
             </action>
         </reference>
+        <reference name="after_body_start">
+            <block type="core/template" name="tm_storepickup" template="tm/storepickup/init.phtml"/>
+        </reference>
     </firecheckout_index_index_custom>
 </layout>
