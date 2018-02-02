@@ -24,6 +24,8 @@ FC.Storepickup = {
 
         if (shippingMethod.getCurrentMethod() === this.method) {
             this.enable();
+        } else {
+            this.disable();
         }
     },
 
@@ -72,18 +74,19 @@ FC.Storepickup = {
 
     togglePickupMethodVisibility: function (flag) {
         var self = this;
-        $$('[name="shipping_method"]').each(function (radio) {
-            var method = flag ? 'show' : 'hide',
-                dd = radio.up('dd'),
-                dt = dd.previous('dt');
 
-            if (radio.value !== self.method) {
-                method = (method === 'show') ? 'hide' : 'show';
-            }
+        // hide/show all methods
+        var method = flag ? 'hide' : 'show';
+        $$('#shipping-method .sp-methods dt, #shipping-method .sp-methods dd').invoke(method);
 
-            dd[method]();
-            dt[method]();
-        });
+        // show/hide pickup method
+        var radio = $$('input[value=' + this.method + ']').first(),
+            method = flag ? 'show' : 'hide',
+            dd = radio.up('dd'),
+            dt = dd.previous('dt');
+
+        dd[method]();
+        dt[method]();
     }
 };
 
