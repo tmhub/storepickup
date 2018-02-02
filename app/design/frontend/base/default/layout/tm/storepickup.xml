@@ -2,13 +2,17 @@
 <layout version="0.1.0">
     <firecheckout_index_index_custom>
         <reference name="head">
-            <action method="addItem">
+            <action method="addItem" ifconfig="tm_storepickup/general/enabled">
                 <type>skin_js</type>
                 <name>tm/storepickup/js/storepickup.js</name>
             </action>
         </reference>
         <reference name="after_body_start">
-            <block type="core/template" name="tm_storepickup" template="tm/storepickup/init.phtml"/>
+            <block type="core/template" name="tm_storepickup">
+                <action method="setTemplate" ifconfig="tm_storepickup/general/enabled">
+                    <template>tm/storepickup/init.phtml</template>
+                </action>
+            </block>
         </reference>
     </firecheckout_index_index_custom>
 </layout>
