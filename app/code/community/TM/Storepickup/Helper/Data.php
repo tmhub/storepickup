@@ -14,11 +14,14 @@ class TM_Storepickup_Helper_Data extends Mage_Core_Helper_Abstract
     public function getAddressData()
     {
         $address = Mage::getStoreConfig('tm_storepickup/address');
+        $address = array_filter($address);
 
-        $street = explode("\n", $address['street']);
-        $address['street'] = array();
-        foreach ($street as $line) {
-            $address['street'][] = $line;
+        if (!empty($address['street'])) {
+            $street = explode("\n", $address['street']);
+            $address['street'] = array();
+            foreach ($street as $line) {
+                $address['street'][] = $line;
+            }
         }
 
         return $address;
