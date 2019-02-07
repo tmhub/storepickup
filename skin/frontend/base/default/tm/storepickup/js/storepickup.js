@@ -1,14 +1,20 @@
 var FC = FC || {};
 FC.Storepickup = {
     init: function () {
-        $('billing:use_for_shipping_yes').up('li').insert({
-            after: [
-                '<li class="control tm_storepickup" style="margin-top:-1px;">',
-                    '<input type="radio" id="tm_storepickup" name="billing[use_for_shipping]" value="tm_storepickup" class="radio"/>',
-                    '<label for="tm_storepickup">' + Translator.translate('Pickup at store') + '</label>',
-                '</li>'
-            ].join('')
-        });
+        if (typeof shippingMethod === 'undefined') {
+            return;
+        }
+
+        if ($('billing:use_for_shipping_yes')) {
+            $('billing:use_for_shipping_yes').up('li').insert({
+                after: [
+                    '<li class="control tm_storepickup" style="margin-top:-1px;">',
+                        '<input type="radio" id="tm_storepickup" name="billing[use_for_shipping]" value="tm_storepickup" class="radio"/>',
+                        '<label for="tm_storepickup">' + Translator.translate('Pickup at store') + '</label>',
+                    '</li>'
+                ].join('')
+            });
+        }
 
         var self = this;
         $('tm_storepickup').observe('click', function () {
