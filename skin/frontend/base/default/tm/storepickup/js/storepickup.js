@@ -81,7 +81,7 @@ FC.Storepickup = {
 
         // hide/show all methods
         var method = flag ? 'hide' : 'show';
-        $$('#shipping-method .sp-methods dt, #shipping-method .sp-methods dd').invoke(method);
+        $$('#shipping-method .sp-methods').first().select('dt, dd').invoke(method);
 
         // show/hide pickup method
         var radio = $$('input[value=' + this.method + ']').first(),
